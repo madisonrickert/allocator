@@ -1,0 +1,23 @@
+version: 2
+updates:
+  # Python dependencies (uv reads from pyproject.toml)
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+    groups:
+      # Batch non-breaking updates so the inbox stays quiet.
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  # GitHub Actions versions (checkout, setup-uv, gitleaks, …)
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    labels:
+      - dependencies
